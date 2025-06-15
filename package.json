@@ -1,0 +1,48 @@
+{
+  "name": "browserux-theme-switcher",
+  "version": "1.0.0",
+  "description": "Lightweight and customizable Web Component for theme toggling (light/dark), with i18n, accessibility, and full framework compatibility.",
+  "main": "dist/browserux-theme-switcher.umd.js",
+  "module": "dist/browserux-theme-switcher.esm.js",
+  "types": "dist/browserux-theme-switcher.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "author": "Effeilo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Effeilo/browserux-theme-switcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Effeilo/browserux-theme-switcher/issues"
+  },
+  "keywords": [
+    "web component",
+    "theme switcher",
+    "dark mode",
+    "light mode",
+    "custom element",
+    "i18n",
+    "accessibility",
+    "react",
+    "vue",
+    "angular",
+    "design system",
+    "shadow dom"
+  ],
+  "dependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "rollup": "^4.42.0",
+    "rollup-plugin-dts": "^6.2.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4"
+  }
+}

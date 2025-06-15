@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+
+	<head>
+
+		<meta charset="utf-8">
+
+		<title></title>
+		<meta name="description" content="">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+		<link rel="icon" href="./favicon-48.png" sizes="48x48" type="image/png">
+
+		<link rel="icon" href="./favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" media="print" onload="this.media='all'">
+		<noscript>
+		  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap">
+		</noscript>
+
+		<link rel="stylesheet" href="./browserux.css">
+		<link rel="stylesheet" href="./demo.css">
+		<script src="./browserux-theme-switcher.min.js"></script>
+		
+	</head>
+
+	<body>
+
+		<main>
+
+			<div>
+
+				<header>
+
+					<img class="has-dark" src="./logo-browserux-theme-switcher.png" alt="BrowserUX Logo" width="600" height="400">
+
+			
+					<h1>BrowserUX Theme Switcher</h1>
+
+						<h2>Demo</h2>
+
+						<p>
+							A <strong>lightweight</strong>, <strong>customizable Web Component</strong> 
+							that allows users to <strong>toggle between light and dark themes</strong>, 
+							accessible, internationalized, and framework-agnostic.
+						</p>
+
+				</header>
+
+				<div>
+
+					<p class="notice">Click the button below to switch the theme:</p>
+
+					<browserux-theme-switcher id="switcher"
+						style="
+							--bux-switch-width: 80px; 
+							--bux-switch-height: 40px;
+							--bux-switch-emoji-size: 3rem;"
+					></browserux-theme-switcher>
+
+
+				</div>
+
+				<img class="has-dark" src="./browserux-theme-switcher.jpg" alt="Light/Dark Mode" width="1200" height="630">
+
+			</div>
+
+		</main>
+
+		<script>
+			const switcher = document.getElementById('switcher');
+
+			switcher.addEventListener('theme-change', (e) => {
+				console.log('Active theme:', e.detail.theme);
+			});
+		</script>
+
+
+	</body>
+
+</html>
