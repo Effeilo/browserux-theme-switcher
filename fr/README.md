@@ -1,4 +1,4 @@
-[EN](./README.md) | **FR**
+[EN](../README.md) | **FR**
 
 <div>
   <img src="https://browserux.com/assets/img/logo/logo-browserux-theme-switcher-250.png" alt="logo BrowserUX Theme Switcher"/>
