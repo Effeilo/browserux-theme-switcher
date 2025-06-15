@@ -1,109 +1,113 @@
+**EN** | [FR](./README_FR.md)
+
 <div>
   <img src="https://browserux.com/assets/img/logo/logo-browserux-theme-switcher-250.png" alt="logo BrowserUX Theme Switcher"/>
 </div>
 
-# BrowserUX theme switcher
+# BrowserUX Theme Switcher
 
-Un Web Component léger et personnalisable permettant aux utilisateurs de basculer entre les thèmes clair et sombre. Accessible, internationalisé et compatible avec tous les frameworks modernes.
+A lightweight and customizable Web Component that allows users to toggle between light and dark themes. Accessible, internationalized, and compatible with all modern frameworks.
 
 [![npm version](https://img.shields.io/npm/v/browserux-theme-switcher.svg)](https://www.npmjs.com/package/browserux-theme-switcher)
 [![unpkg](https://img.shields.io/badge/CDN-unpkg-brightgreen)](https://unpkg.com/browserux-theme-switcher/dist/browserux-theme-switcher.min.js)
 
-Le site du projet : [BrowserUX Theme Switcher](https:/breowserux.com/theme-switcher)
+- Project website: [BrowserUX Theme Switcher](https://browserux.com/theme-switcher/)
+- [Documentation](https://browserux.com/theme-switcher/documentation/)
+- [About BrowserUX Theme Switcher](https://browserux.com/blog/articles/about-browserux-theme-switcher.html)
 
-## Sommaire 
 
-- [Fonctionnalités](#fonctionnalités)
-- [Fonctionnement](#fonctionnement)
+## Table of Contents
+
+- [Features](#features)
+- [How It Works](#how-it-works)
 - [Installation](#installation)
-- [Utilisation](#utilisation)
-- [Paramètres](#paramètres-de-browserux-theme-switcher)
-- [Build & Développement](#build--développement)
-- [Licence](#license)
+- [Usage](#usage)
+- [Parameters](#parameters-of-browserux-theme-switcher)
+- [Build & Development](#build--development)
+- [License](#license)
 
-## Fonctionnalités 
+## Features
 
-### 🎛 Comportement intelligent
+### 🎛 Smart Behavior
 
-- 🎚 **Changement de thème**  
-  Alterne entre `data-theme="light"` et `"dark"` sur un élément cible (par défaut `<html>`)
+- 🎚 **Theme Switching**  
+  Toggles between `data-theme="light"` and `"dark"` on a target element (default is `<html>`)
 
-- 💾 **Persistance automatique**  
-  Stocke la préférence utilisateur dans `localStorage` et la restaure à chaque visite
+- 💾 **Automatic Persistence**  
+  Stores user preference in `localStorage` and restores it on each visit
 
-- 🕶 **Détection système**  
-  Active automatiquement le thème en fonction de `prefers-color-scheme` si aucune préférence n’est définie
+- 🕶 **System Detection**  
+  Automatically applies the theme based on `prefers-color-scheme` if no user preference is set
 
-- 📢 **Événement `theme-change`**  
-  Déclenche un événement personnalisé à chaque changement de thème (`e.detail.theme = "light" | "dark"`)
+- 📢 **`theme-change` Event**  
+  Fires a custom event on each theme change (`e.detail.theme = "light" | "dark"`)
 
+### 🌍 Accessibility & Internationalization
 
-### 🌍 Accessibilité & internationalisation
+- 🧠 **Dynamic ARIA Labels**  
+  Multilingual accessible labels generated automatically or customizable (`data-label-*`)
 
-- 🧠 **Libellés ARIA dynamiques**  
-  Textes accessibles multilingues générés automatiquement ou personnalisables (`data-label-*`)
+- 🌐 **Internationalization (`lang`)**  
+  Supports multiple languages (auto-detection or manual setting via the `lang` attribute)
 
-- 🌐 **Internationalisation (`lang`)**  
-  Prise en charge de plusieurs langues (auto-détection ou forçage via attribut `lang`)
+### 🎨 Visual Customization
 
+- 🎯 **CSS Targeting (`target`)**  
+  Allows applying the theme to a specific element (e.g., `<main>`, `#app`, etc.)
 
-### 🎨 Personnalisation visuelle
+- 🎨 **Customizable CSS Variables**  
+  Extensive visual customization via CSS properties (`--bux-switch-*`)
 
-- 🎯 **Ciblage CSS (`target`)**  
-  Permet d’appliquer le thème à un élément spécifique (par ex. : `<main>`, `#app`, etc.)
+- 🌗 **Custom Icon Slots**  
+  Customize icons using SVGs, emojis, or images (`light-icon`, `dark-icon`)
 
-- 🎨 **Variables CSS modifiables**  
-  Large personnalisation de l’apparence via des propriétés CSS (`--bux-switch-*`)
+- 🖼 **Adaptive Images (`.has-dark`)**  
+  Automatically switch images based on the theme (e.g., `logo.png` → `logo-dark.png`)
 
-- 🌗 **Slots personnalisés pour icônes**  
-  Personnalisation des icônes avec des balises SVG, emojis ou images (`light-icon`, `dark-icon`)
+### 🔧 Flexible Integration
 
-- 🖼 **Images adaptatives (`.has-dark`)**  
-  Remplacement automatique d’images selon le thème (ex. `logo.png` → `logo-dark.png`)
+- 🧩 **Optional Shadow DOM (`no-shadow`)**  
+  Disable encapsulation to allow more flexible global styling
+  
 
-### 🔧 Intégration flexible
+## How It Works
 
-- 🧩 **Shadow DOM optionnel (`no-shadow`)**  
-  Encapsulation désactivable pour permettre un style global plus souple    
+The `<browserux-theme-switcher>` component dynamically applies a light or dark theme to an element on your page (`<html>` by default, or another element via the `target` attribute).
 
-## Fonctionnement
+It follows a three-step logic:
 
-Le composant `<browserux-theme-switcher>` applique dynamiquement un thème clair ou sombre sur un élément de votre page (`<html>` par défaut ou un autre via l’attribut `target`).
+### 1. Automatic Detection of System Theme
 
-Il suit une logique en trois étapes :
-
-### 1. Détection automatique du thème système
-
-Si aucune préférence utilisateur n’est encore définie, le composant détecte automatiquement le thème préféré du système via la règle CSS :
+If no user preference is set, the component automatically detects the system’s preferred theme using the CSS rule:
 
 ```css
 @media (prefers-color-scheme: dark)
 ```
 
-### 2. Stockage de la préférence utilisateur
+### 2. Storing User Preference
 
-Lorsque l’utilisateur clique sur le bouton pour basculer de thème, sa préférence (`light` ou `dark`) est enregistrée dans `localStorage`.
+When the user clicks the button to switch themes, their preference (`light` or `dark`) is saved in `localStorage`.
 
-Cette préférence sera :
+This preference will:
 
-- appliquée automatiquement à la prochaine visite
-- prioritaire sur la détection système
+- be automatically applied on the next visit  
+- take priority over system detection
 
-### 3. Application du thème dans le DOM
+### 3. Applying the Theme in the DOM
 
-Le composant applique ou met à jour dynamiquement l’attribut data-theme sur l’élément ciblé, par exemple :
+The component dynamically sets or updates the `data-theme` attribute on the targeted element, for example:
 
 ```html
 <html data-theme="dark">...</html>
 ```
 
-Cela permet de :
+This allows you to:
 
-- styliser la page via des variables CSS conditionnelles
-- adapter les images (avec `.has-dark`)
-- réagir via des événements (comme `theme-change`)
+- style the page using conditional CSS variables  
+- adapt images (using `.has-dark`)  
+- respond to events (like `theme-change`)
 
-> Le composant fonctionne sans dépendance, sans configuration complexe, et est compatible avec tous les frameworks modernes (React, Vue, Angular) ainsi qu’en HTML pur.
+> The component works without dependencies, requires no complex configuration, and is compatible with all modern frameworks (React, Vue, Angular) as well as plain HTML.
 
 ## Installation
 
@@ -111,27 +115,27 @@ Cela permet de :
 npm install browserux-theme-switcher
 ```
 
-Ou via CDN:
+Or via CDN:
 
 ```html
 <script type="module" src="https://unpkg.com/browserux-theme-switcher/dist/browserux-theme-switcher.min.js"></script>
 ```
 
->  Utilisez la version .esm.js si vous intégrez ce composant via bundler (React, Vue, etc.), et la version .min.js pour une intégration HTML directe via CDN.
+> Use the `.esm.js` version if you're integrating this component via a bundler (React, Vue, etc.), and the `.min.js` version for direct HTML integration via CDN.
 
-## Utilisation
+## Usage
 
-### Le composant web `<browserux-theme-switcher>`
+### The `<browserux-theme-switcher>` Web Component
 
-#### Projet moderne avec bundler (Vite, Webpack, etc.)
+#### Modern project with bundler (Vite, Webpack, etc.)
 
-1. Importez simplement le composant dans votre code :
+1. Simply import the component into your code:
 
 ```js
 import 'browserux-theme-switcher';
 ```
 
-2. Puis utilisez-le dans votre HTML :
+2. Then use it in your HTML:
 
 ```html
 <browserux-theme-switcher></browserux-theme-switcher>
@@ -139,7 +143,7 @@ import 'browserux-theme-switcher';
 
 #### React / Next.js
 
-1. Ajoutez dans votre composant React (souvent dans un useEffect) :
+1. Add this to your React component (typically inside a `useEffect`):
 
 ```jsx
 import { useEffect } from 'react';
@@ -149,23 +153,23 @@ useEffect(() => {
 }, []);
 ```
 
-2. Et dans votre JSX 
+2. And in your JSX:
 
 ```jsx
 <browserux-theme-switcher></browserux-theme-switcher>
 ```
 
-> Ajoutez le fichier `types/browserux-theme-switcher.d.ts` pour un meilleur support TypeScript avec JSX.
+> Add the `types/browserux-theme-switcher.d.ts` file for better TypeScript support with JSX.
 
 #### Vue 3
 
-1. Ajoutez dans main.js ou main.ts :
+1. Add this in `main.js` or `main.ts`:
 
 ```js
 import 'browserux-theme-switcher';
 ```
 
-2. Utilisez-le comme un composant natif :
+2. Use it as a native component:
 
 ```html
 <browserux-theme-switcher lang="fr"></browserux-theme-switcher>
@@ -173,13 +177,13 @@ import 'browserux-theme-switcher';
 
 #### Angular
 
-1. Importez dans main.ts :
+1. Import it in `main.ts`:
 
 ```ts
 import 'browserux-theme-switcher';
 ```
 
-2. Ajoutez le `CUSTOM_ELEMENTS_SCHEMA` dans `AppModule` :
+2. Add `CUSTOM_ELEMENTS_SCHEMA` to `AppModule`:
 
 ```ts
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -190,25 +194,27 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 export class AppModule {}
 ```
 
-#### Intégration sans bundler / script global
+#### Integration without bundler / global script
 
-1. Ajoutez directement le composant via un CDN :
+1. Add the component directly via a CDN:
 
 ```html
 <script type="module" src="https://unpkg.com/browserux-theme-switcher/dist/browserux-theme-switcher.min.js"></script>
 ```
 
-2. Puis :
+2. And:
 
 ```html
 <browserux-theme-switcher></browserux-theme-switcher>
 ```
 
-### Gestion des styles CSS
+### Managing CSS Styles
 
-Pour que le thème clair ou sombre s’applique à votre page, vous devez définir vos couleurs via des variables CSS. Le composant `<browserux-theme-switcher>` applique automatiquement un attribut `data-theme="dark"` ou `"light"` à l’élément ciblé (par défaut `<html>`), ce qui permet de styliser dynamiquement votre interface.
+To apply the light or dark theme to your page, you need to define your colors using CSS variables.  
+The `<browserux-theme-switcher>` component automatically applies a `data-theme="dark"` or `"light"` attribute  
+to the targeted element (by default `<html>`), which enables dynamic styling of your interface.
 
-#### Exemple complet 
+#### Full Example
 
 ```css
 :root {
@@ -219,7 +225,7 @@ Pour que le thème clair ou sombre s’applique à votre page, vous devez défin
     --bux-white: #fff;
 }
 
-/** Mode sombre automatique selon les préférences système */
+/** Automatic dark mode based on system preferences */
 @media (prefers-color-scheme: dark) {
     :root {
         --bux-page-bg: #333;
@@ -230,7 +236,7 @@ Pour que le thème clair ou sombre s’applique à votre page, vous devez défin
     }
 }
 
-/** Mode sombre forcé via browserux-theme-switcher */
+/** Dark mode forced via browserux-theme-switcher */
 [data-theme="dark"] {
     --bux-page-bg: #333;
     --bux-page-color: #eaeaea;
@@ -242,76 +248,79 @@ Pour que le thème clair ou sombre s’applique à votre page, vous devez défin
 
 #### Explications 
 
-- `:root` définit les couleurs par défaut (mode clair).
-- `@media (prefers-color-scheme: dark)` permet de prendre en compte les préférences système si l’utilisateur n’a pas encore choisi de thème.
-- `[data-theme="dark"]` permet de forcer le mode sombre lorsque l’utilisateur clique sur le bouton du browserux-theme-switcher.
+- `:root` defines the default colors (light mode).
+- `@media (prefers-color-scheme: dark)` takes system preferences into account if the user hasn't selected a theme yet.
+- `[data-theme="dark"]` forces dark mode when the user clicks the browserux-theme-switcher button.
 
-> Le switcher applique `data-theme="dark"` ou `data-theme="light"` sur l’élément ciblé (`html` par défaut, ou un conteneur via l’attribut `target`). Vous devez donc appliquer les variables CSS sur le même élément ou un parent commun.
+> The switcher applies `data-theme="dark"` or `data-theme="light"` to the targeted element (`html` by default, or a container via the `target` attribute).  
+> You should apply CSS variables to that same element or a shared parent.
 
-### Gestion des images selon le thème (dark mode)
+### Managing Images Based on Theme (Dark Mode)
 
-Le composant `<browserux-theme-switcher>` prend en charge automatiquement l’affichage d’images adaptées au thème (clair ou sombre), grâce à la classe spéciale `has-dark`.
+The `<browserux-theme-switcher>` component automatically handles theme-adaptive image display (light or dark) using the special `has-dark` class.
 
-#### Comment ça fonctionne ?
+#### How does it work?
 
-Lorsque vous ajoutez la classe `has-dark` à une image dans votre HTML :
+When you add the `has-dark` class to an image in your HTML:
 
 ```html
 <img src="logo.png" class="has-dark" alt="Logo">
 ```
 
-Le composant remplacera automatiquement l’attribut `src` par une version `-dark` lorsque le thème sombre est actif, et reviendra à l’image initiale si le thème redevient clair.
+The component will automatically replace the `src` attribute with a `-dark` version when dark mode is active,  
+and revert to the original image when switching back to light mode.
 
-#### Conditions à respecter
+#### Requirements
 
-- L’image d’origine doit être nommée `nom.ext` (ex. `logo.png`).
-- L’image sombre doit être nommée exactement `nom-dark.ext`(ex. `logo-dark.png`).
-- Les deux images doivent se trouver dans le même répertoire.
+- The original image must be named `name.ext` (e.g., `logo.png`).
+- The dark image must be named exactly `name-dark.ext` (e.g., `logo-dark.png`).
+- Both images must be located in the same directory.
 
-#### Exemple
+#### Example
 
-En mode clair :
+In light mode:
 
 ```html
 <img src="logo.png" class="has-dark" />
 ```
 
-→ Affiche `logo.png`
+→ Displays `logo.png`
 
-🌙 En mode sombre :
+🌙 In dark mode:
 
-→ Remplacée automatiquement par `logo-dark.png`
+→ Automatically replaced with `logo-dark.png`
 
-> Le changement est réversible et instantané à chaque bascule de thème, sans rechargement de page ni JavaScript supplémentaire.
+> The change is reversible and instant every time the theme switches, with no page reload or extra JavaScript required.
 
-## Paramètres de `<browserux-theme-switcher>`
+## Parameters of `<browserux-theme-switcher>`
 
-`<browserux-theme-switcher>` offre de nombreuses possibilités de personnalisation :
+`<browserux-theme-switcher>` offers many customization options:
 
-| Paramètre | Type | Nom | Description |
-|-----------|------|-----|-------------|
-| Ciblage personnalisé | Attribut | `target` | Applique le thème sur un élément spécifique |
-| Internationalisation | Attribut | `lang` | Choix de la langue |
-| Accessibilité ARIA | Attribut | `data-label-*` | Libellés accessibles modifiables |
-| Shadow DOM optionnel | Attribut | `no-shadow` | Encapsulation désactivable |
-| Personnalisation CSS | Attribut | `Style` | Personnalisation via variables CSS |  
-| Événement personnalisable  | Événement | `theme-change` | Événement émis sur chaque changement de thème |
-| Slots icônes | Slot | `*-icon` | Personnalisation des icônes |       
+| Parameter                | Type      | Name            | Description                                         |
+|--------------------------|-----------|------------------|-----------------------------------------------------|
+| Custom Targeting         | Attribute | `target`         | Applies the theme to a specific element             |
+| Internationalization     | Attribute | `lang`           | Language selection                                  |
+| ARIA Accessibility       | Attribute | `data-label-*`   | Customizable accessible labels                      |
+| Optional Shadow DOM      | Attribute | `no-shadow`      | Disable encapsulation                               |
+| CSS Customization        | Attribute | `style`          | Customization via CSS variables                     |
+| Custom Event             | Event     | `theme-change`   | Event triggered on every theme change               |
+| Icon Slots               | Slot      | `*-icon`         | Icon customization                                  |
+  
 
-### Attributs 
+### Attributes
 
-#### Ciblage personnalisé (`target`)
+#### Custom Targeting (`target`)
 
-Par défaut, le composant `<browserux-theme-switcher>` applique le thème (`data-theme="light"` ou `"dark"`) sur l’élément `<html>`.
-Mais vous pouvez personnaliser cette cible grâce à l’attribut `target`.
+By default, the `<browserux-theme-switcher>` component applies the theme (`data-theme="light"` or `"dark"`) to the `<html>` element.  
+However, you can customize this target using the `target` attribute.
 
-##### Attribut : `target`
+##### Attribute: `target`
 
-- Type : `string` (sélecteur CSS valide)
-- Valeur par défaut : `html`
-- Effet : applique l’attribut `data-theme` sur l’élément correspondant
+- Type: `string` (valid CSS selector)
+- Default value: `html`
+- Effect: applies the `data-theme` attribute to the specified element
 
-##### Exemple
+##### Example
 
 ```html
 <browserux-theme-switcher 
@@ -319,15 +328,16 @@ Mais vous pouvez personnaliser cette cible grâce à l’attribut `target`.
 ></browserux-theme-switcher>
 
 <div id="app">
-  <!-- Le thème s'applique ici -->
+  <!-- The theme is applied here -->
 </div>
 ```
 
-Dans cet exemple, c’est l’élément `#app` (et non `<html>`) qui recevra l’attribut `data-theme`. Cela permet de limiter le thème à un conteneur spécifique de votre application (utile dans des micro-frontends, app-shells ou widgets embarqués).
+In this example, the `#app` element (and not `<html>`) will receive the `data-theme` attribute.  
+This allows you to scope the theme to a specific container in your application—useful for micro-frontends, app shells, or embedded widgets.
 
-##### Astuce
+##### Tip
 
-Assurez-vous que vos styles CSS dépendent bien de `[data-theme="dark"]` ou `[data-theme="light"]` sur le bon sélecteur :
+Make sure your CSS styles are based on `[data-theme="dark"]` or `[data-theme="light"]` applied to the correct selector:
 
 ```css
 #app[data-theme="dark"] {
@@ -336,19 +346,19 @@ Assurez-vous que vos styles CSS dépendent bien de `[data-theme="dark"]` ou `[da
 }
 ```
 
-> Si le sélecteur passé dans target ne correspond à aucun élément au moment du rendu, le fallback sera `<html>`.
+> If the selector passed to `target` does not match any element at render time, the fallback will be `<html>`.
 
-#### Internationalisation (`lang`)
+#### Internationalization (`lang`)
 
-Le composant `<browserux-theme-switcher>` prend en charge plusieurs langues pour ses libellés accessibles (par exemple : Activer sombre, Switch to light mode, etc.).
+The `<browserux-theme-switcher>` component supports multiple languages for its accessible labels (e.g., "Switch to dark mode", "Activer sombre", etc.).
 
-##### Attribut : `lang`
+##### Attribute: `lang`
 
-- Type : `string`  ("`en`", "`fr`", "`es`", "`de`", "`ja`", "`ru`", "`pt`", "`it`", "`nl`")
-- Valeur par défaut : auto-détection
-- Effet : force la langue utilisée pour les libellés ARIA (`aria-label`) du switch
+- Type: `string`  (`"en"`, `"fr"`, `"es"`, `"de"`, `"ja"`, `"ru"`, `"pt"`, `"it"`, `"nl"`)
+- Default value: auto-detection
+- Effect: forces the language used for the switch's ARIA labels (`aria-label`)
 
-##### Exemple
+##### Example
 
 ```html
 <browserux-theme-switcher 
@@ -356,46 +366,47 @@ Le composant `<browserux-theme-switcher>` prend en charge plusieurs langues pour
 ></browserux-theme-switcher>
 ```
 
-Le libellé ARIA du bouton sera automatiquement en français :
-`aria-label="Activer le mode sombre"` ou `aria-label="Activer le mode clair"`
+The ARIA label of the button will automatically be in French:  
+`aria-label="Activer le mode sombre"` or `aria-label="Activer le mode clair"`
 
-##### Détection automatique si lang n’est pas défini
+##### Automatic Detection if `lang` Is Not Defined
 
-Si vous n'indiquez pas `lang`, le composant suit cette logique :
+If you don’t specify the `lang` attribute, the component follows this logic:
 
-1. Utilise la valeur de lang sur la balise `<browserux-theme-switcher>`
-2. Sinon, regarde la valeur de lang sur la balise `<html lang="...">`
-3. Sinon, fallback vers "`en`" (anglais)
+1. Uses the `lang` value on the `<browserux-theme-switcher>` tag  
+2. Otherwise, checks the `lang` value on the `<html lang="...">` tag  
+3. Otherwise, falls back to `"en"` (English)
 
-##### Langues intégrées
+##### Built-in Languages
 
-Le composant prend en charge les langues suivantes pour les libellés accessibles (`aria-label`) :
+The component supports the following languages for accessible labels (`aria-label`):
 
-- 🇬🇧 en – English (par défaut)
-- 🇫🇷 fr – Français
-- 🇪🇸 es – Español
-- 🇩🇪 de – Deutsch
-- 🇯🇵 ja – 日本語 (Japonais)
-- 🇷🇺 ru – Русский (Russe)
-- 🇵🇹 pt – Português
-- 🇮🇹 it – Italiano
-- 🇳🇱 nl – Nederlands
+- 🇬🇧 en – English (default)  
+- 🇫🇷 fr – French  
+- 🇪🇸 es – Spanish  
+- 🇩🇪 de – German  
+- 🇯🇵 ja – Japanese  
+- 🇷🇺 ru – Russian  
+- 🇵🇹 pt – Portuguese  
+- 🇮🇹 it – Italian  
+- 🇳🇱 nl – Dutch
 
-#### Accessibilité ARIA (`data-label-light` / `data-label-dark`)
+#### ARIA Accessibility (`data-label-light` / `data-label-dark`)
 
-Le composant `<browserux-theme-switcher>` est conçu pour être accessible aux lecteurs d’écran, grâce à des libellés dynamiques (`aria-label`) qui décrivent l’action du bouton (activer le mode clair ou sombre).
+The `<browserux-theme-switcher>` component is designed to be screen reader–friendly,  
+thanks to dynamic `aria-label`s that describe the button's action (e.g., switch to light or dark mode).
 
-Par défaut, ces libellés sont générés automatiquement en fonction de la langue (via l’attribut `lang`).
-Mais vous pouvez surcharger ces textes avec vos propres libellés personnalisés grâce à deux attributs :
+By default, these labels are automatically generated based on the selected language (`lang` attribute).  
+However, you can override them with your own custom labels using two attributes:
 
-##### Attributs
+##### Attributes
 
-| Attribut | Rôle |
-|-----------|------|
-| `data-label-light` | Libellé lorsque le thème actif est sombre et que le bouton permet d’activer le mode clair |
-| `data-label-dark` | Libellé lorsque le thème actif est clair et que le bouton permet d’activer le mode sombre |
+| Attribute           | Role                                                                                   |
+|---------------------|----------------------------------------------------------------------------------------|
+| `data-label-light`  | Label when dark theme is active and the button allows switching to light mode         |
+| `data-label-dark`   | Label when light theme is active and the button allows switching to dark mode         |
 
-##### Exemple
+##### Example
 
 ```html
 <browserux-theme-switcher
@@ -404,61 +415,63 @@ Mais vous pouvez surcharger ces textes avec vos propres libellés personnalisés
 </browserux-theme-switcher>
 ```
 
-Résultat :
+Result:
 
-- En mode clair → `aria-label="Passer en mode sombre"`
-- En mode sombre → `aria-label="Activer le thème clair"`
+- In light mode → `aria-label="Switch to dark mode"`
+- In dark mode → `aria-label="Activate light theme"`
 
-> Ces attributs sont prioritaires sur la détection automatique de langue (`lang`).
+> These attributes take precedence over automatic language detection (`lang`).
 
-#### Shadow DOM optionnel (`no-shadow`)
+#### Optional Shadow DOM (`no-shadow`)
 
-Par défaut, le composant `<browserux-theme-switcher>` utilise le Shadow DOM pour encapsuler son HTML et son CSS. Cela garantit que ses styles internes ne perturbent pas ceux de la page, et inversement.
+By default, the `<browserux-theme-switcher>` component uses Shadow DOM to encapsulate its HTML and CSS.  
+This ensures that its internal styles don’t interfere with the rest of the page—and vice versa.
 
-Mais dans certains cas, notamment pour appliquer des styles globaux ou pour des contraintes spécifiques de framework, il peut être utile de désactiver cette encapsulation.
+However, in some cases—such as applying global styles or addressing specific framework constraints—it may be helpful to disable this encapsulation.
 
-##### Attribut : `no-shadow`
+##### Attribute: `no-shadow`
 
-- Type : `boolean` (présence seule)
-- Valeur par défaut : non présent → Shadow DOM activé
-- Effet : si présent, le composant est rendu dans le DOM global sans encapsulation
+- Type: `boolean` (presence-only)
+- Default value: not present → Shadow DOM enabled
+- Effect: if present, the component is rendered in the global DOM without encapsulation
 
-##### Exemple
+##### Example
 
 ```html
 <browserux-theme-switcher no-shadow></browserux-theme-switcher>
 ```
 
-Ce composant :
+This component:
 
-- sera rendu dans le DOM classique (pas dans un shadowRoot)
-- pourra être stylisé depuis votre CSS global
-- héritera plus facilement des styles extérieurs
+- will be rendered in the regular DOM (not inside a shadowRoot)
+- can be styled using your global CSS
+- will more easily inherit external styles
 
-##### Quand utiliser no-shadow ?
+##### When to use `no-shadow`?
 
-- Lorsque vous voulez surcharger facilement les styles du composant via CSS global
-- Si vous devez thématiser le switcher à partir de variables CSS de la page
-- En contexte d’intégration dans un framework (ex. Angular) où le Shadow DOM pose problème
-- Pour déboguer plus simplement le rendu dans le DOM
+- When you want to easily override the component’s styles via global CSS
+- If you need to theme the switcher using page-level CSS variables
+- When integrating in a framework (e.g., Angular) where Shadow DOM causes issues
+- To debug the component’s rendering more easily in the DOM
 
-> Attention : sans Shadow DOM, le composant est plus sensible aux conflits de styles globaux. À utiliser avec précaution dans les grandes applications.
+> ⚠️ Without Shadow DOM, the component is more vulnerable to global style conflicts. Use with caution in large-scale applications.
 
-#### Personnalisation CSS (`style`)  
+#### CSS Customization (`style`)
 
-Le composant `<browserux-theme-switcher>` expose plusieurs variables CSS personnalisables permettant de modifier son apparence sans avoir à surcharger son style interne.
+The `<browserux-theme-switcher>` component exposes several customizable CSS variables  
+to let you tweak its appearance without overriding internal styles.
 
-##### Variables disponibles
+##### Available Variables
 
-| Variable                 | Default | Description                 |
-|--------------------------|---------|-----------------------------|
-| --bux-switch-width       | `40px`  | Largeur du bouton toggle  |
-| --bux-switch-height      | `24px`  | Hauteur  du bouton toggle |
-| --bux-switch-bg-color    | `#888`  | Couleur de fond du switch    |
-| --bux-switch-thumb-color | `#fff`  | Couleur du thumb   |
-| --bux-switch-emoji-size | `inherit`  | Taille des icônes emoji   |
+| Variable                  | Default   | Description                |
+|---------------------------|-----------|----------------------------|
+| `--bux-switch-width`      | `40px`    | Width of the toggle button |
+| `--bux-switch-height`     | `24px`    | Height of the toggle button |
+| `--bux-switch-bg-color`   | `#888`    | Background color of the switch |
+| `--bux-switch-thumb-color`| `#fff`    | Thumb color                |
+| `--bux-switch-emoji-size` | `inherit` | Emoji icon size            |
 
-##### Exemple
+##### Example
 
 ```html
 <browserux-theme-switcher
@@ -471,23 +484,24 @@ Le composant `<browserux-theme-switcher>` expose plusieurs variables CSS personn
 ></browserux-theme-switcher>
 ```
 
-- Ces variables peuvent être modifiées dynamiquement selon le thème (`[data-theme="dark"]`) ou les breakpoints (media queries).
-- Elles fonctionnent même si le `Shadow DOM` est activé, grâce à l’usage des `CSS custom properties`.
+- These variables can be dynamically updated based on the theme (`[data-theme="dark"]`) or breakpoints (media queries).
+- They work even if `Shadow DOM` is enabled, thanks to the use of `CSS custom properties`.
 
-### Événements 
+### Events
 
-#### Événement personnalisable (`theme-change`)
+#### Custom Event (`theme-change`)
 
-Le composant `<browserux-theme-switcher>` déclenche un événement personnalisé nommé `theme-change` à chaque changement de thème (suite à un clic utilisateur, un chargement initial avec `localStorage`, etc.).
+The `<browserux-theme-switcher>` component dispatches a custom event named `theme-change` whenever the theme changes  
+(e.g., after a user click, or an initial load using `localStorage`, etc.).
 
-Cet événement permet à votre application de réagir dynamiquement aux changements de thème (mise à jour du layout, analytics, etc.).
+This event allows your application to dynamically respond to theme changes (layout updates, analytics, etc.).
 
-##### Événement
+##### Event
 
-- Nom : `theme-change`
-- Contenu :l’événement émis est un `CustomEvent` dont `e.detail.theme` contient la nouvelle valeur de thème ("`light`" ou "`dark`").
+- Name: `theme-change`
+- Payload: the emitted event is a `CustomEvent` where `e.detail.theme` contains the new theme value (`"light"` or `"dark"`).
 
-##### Exemple d’écouteur JavaScript
+##### Example JavaScript listener
 
 ```js
 const switcher = document.querySelector('browserux-theme-switcher');
@@ -497,30 +511,30 @@ switcher?.addEventListener('theme-change', (e) => {
 });
 ```
 
-##### Cas d’usage possibles
+##### Possible use cases
 
-- Modifier dynamiquement une classe CSS sur le `body`
-- Déclencher une animation ou une transition
-- Stocker le thème dans un contexte global ou service JS
-- Traquer les interactions avec un outil d’analytics
+- Dynamically change a CSS class on the `body`
+- Trigger an animation or transition
+- Store the theme in a global context or JS service
+- Track interactions with an analytics tool
 
-> L’événement est disponible dès l'initialisation du composant et fonctionne dans tous les contextes (framework ou HTML pur).
+> The event is available as soon as the component is initialized and works in all contexts (frameworks or plain HTML).
 
-### Slots 
+### Slots
 
-#### Personnalisation des icônes (`light-icon` / `dark-icon`)
+#### Custom icon slots (`light-icon` / `dark-icon`)
 
-Le composant `<browserux-theme-switcher>` permet de personnaliser l’apparence de son bouton en remplaçant les icônes par défaut grâce à l’usage des slots HTML.
+The `<browserux-theme-switcher>` component allows customization of its toggle button appearance  
+by replacing default icons using HTML slots.
 
-##### Slots disponibles
+##### Available slots
 
-| 
-Slot                 | Affiché quand le thème est... | 	Exemple d’usage                 |
-|--------------------------|---------|-----------------------------|
-| `light-icon`      | actif = sombre (icône du mode clair à activer)  | ☀️, soleil, light.svg  |
-| `dark-icon`      | actif = clair (icône du mode sombre à activer)  | 🌙, lune, moon.svg |
+| Slot          | Displayed when the current theme is...             | Example usage              |
+|---------------|-----------------------------------------------------|----------------------------|
+| `light-icon`  | Active = dark (icon to switch to light mode)        | ☀️, sun, light.svg          |
+| `dark-icon`   | Active = light (icon to switch to dark mode)        | 🌙, moon, moon.svg          |
 
-##### Exemples
+##### Examples
 
 ```html
 <browserux-theme-switcher>
@@ -529,38 +543,40 @@ Slot                 | Affiché quand le thème est... | 	Exemple d’usage     
 </browserux-theme-switcher>
 ```
 
-Ou avec des images SVG :
+Or with SVG images:
 
 ```html
 <browserux-theme-switcher>
-  <img slot="light-icon" src="sun.svg" width="20" height="20" alt="Theme clair">
-  <img slot="dark-icon" src="moon.svg" width="20" height="20" alt="Theme sombre">
+  <img slot="light-icon" src="sun.svg" width="20" height="20" alt="Light mode">
+  <img slot="dark-icon" src="moon.svg" width="20" height="20" alt="Dark mode">
 </browserux-theme-switcher>
 ```
 
-##### Fonctionnement
+##### Behavior
 
-- Chaque slot est dynamiquement affiché ou caché selon le thème actif
-- Les slots sont accessibles (avec aria-label) et peuvent contenir :
-    - emoji
-    - icônes SVG
-    - images raster
-    - balises personnalisées
+- Each slot is dynamically shown or hidden based on the active theme
+- Slots are accessible (with `aria-label`) and can contain:
+    - emojis
+    - SVG icons
+    - raster images
+    - custom elements
 
-> Si aucun slot n’est fourni, des icônes par défaut sont utilisées (☀️ / 🌙).
+> If no slot is provided, default icons are used (☀️ / 🌙).
 
-## Build & Développement
+## Build & Development
 
 ```bash
 npm install
 npm run build
 ```
 
-Utilisez TypeScript + Rollup pour build :
+The project uses TypeScript and Rollup to generate build outputs:
 - `dist/browserux-theme-switcher.esm.js`
 - `dist/browserux-theme-switcher.umd.js`
 - `dist/browserux-theme-switcher.d.ts`
 
+> These builds are ready to be used in both module-based environments and traditional script loading contexts.
+
 ## License
 
-Licence MIT, Libre d’utilisation, de modification et de distribution.
+MIT License, Free to use, modify, and distribute.
