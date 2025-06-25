@@ -1,6 +1,6 @@
 {
   "name": "browserux-theme-switcher",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Lightweight and customizable Web Component for theme toggling (light/dark), with i18n, accessibility, and full framework compatibility.",
   "main": "dist/browserux-theme-switcher.umd.js",
   "module": "dist/browserux-theme-switcher.esm.js",

@@ -15,6 +15,21 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [1.0.3] – 25-06-2025
+
+### 🐞 Corrigé
+
+- Compatibilité assurée du switch de thème sur Firefox :
+  - Le positionnement du curseur est désormais contrôlé via une variable CSS dynamique (`--toggle-shift`)
+    au lieu du sélecteur `:host(.dark)`.
+  - Cela contourne les limitations connues du support de Shadow DOM dans Firefox.
+
+<br>
+
+---
+
+<br>
+
 ## [1.0.2] – 25-06-2025
 
 ### 🐞 Corrigé

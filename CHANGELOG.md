@@ -15,6 +15,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 <br>
 
+## [1.0.3] – 2025-06-25
+
+### 🐞 Fixed
+
+- Ensured full theme toggle compatibility in Firefox:
+  - Replaced reliance on `:host(.dark)` selector with a dynamic CSS variable (`--toggle-shift`)
+    to control the toggle thumb position.
+  - This avoids known limitations in Firefox's handling of Shadow DOM state-based selectors.
+
+<br>
+
+---
+
+<br>
+
 ## [1.0.2] – 2025-06-25
 
 ### 🐞 Fixed

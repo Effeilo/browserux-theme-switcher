@@ -67,17 +67,16 @@ template.innerHTML = `
         top: 2px;
         transition: transform 0.3s ease;
         width: calc(var(--bux-switch-height) - 4px);
+        transform: var(--toggle-shift, translateX(0));
     }
     .theme-toggle-wrapper .default-emoji {
         font-size: var(--bux-switch-emoji-size);
         position: relative;
         top: -2px;
     }
-    [data-theme="dark"] .toggle-thumb,
-    :host-context([data-theme="dark"]) .toggle-thumb,
-    :host(.dark) .toggle-thumb {
-        transform: translateX(calc(var(--bux-switch-width) - var(--bux-switch-height)));
-    }
+
+    
+
 </style>
 <div class="theme-toggle-wrapper">
     <span class="theme-icon" aria-hidden="true">
@@ -355,14 +354,15 @@ class BrowseruxThemeSwitcher extends HTMLElement {
         target.setAttribute('data-theme', theme);
 
         /**
-         * Firefox fallback:
-         * Firefox does not support the CSS selector :host-context()
-         * To ensure styles inside the Shadow DOM can respond to the theme,
-         * we add a theme-specific class ('dark' or 'light') to the custom element itself.
-         * This allows using :host(.dark) and :host(.light) inside component styles.
+         * Firefox-compatible toggle positioning:
+         * Instead of relying on :host(.dark), we dynamically set a CSS variable
+         * that controls the toggle position. This ensures consistent behavior
+         * across all browsers, including Firefox, which may not apply
+         * Shadow DOM state-based selectors like :host(.dark) reliably.
          */
-        this.classList.toggle('dark', theme === 'dark');
-        this.classList.toggle('light', theme === 'light');
+        this.style.setProperty('--toggle-shift', theme === 'dark'
+            ? 'translateX(calc(var(--bux-switch-width) - var(--bux-switch-height)))'
+            : 'translateX(0)');
 
         // Updates the ARIA label on the toggle button based on the new theme
         this.updateButtonLabel();
