@@ -15,6 +15,19 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [1.0.2] – 25-06-2025
+
+### 🐞 Corrigé
+
+- Compatibilité Firefox : ajout d’un fallback pour le sélecteur `:host-context([data-theme="dark"])` non pris en charge.
+  - Le composant ajoute désormais aussi une classe `.dark` à `<browserux-theme-switcher>`, permettant de cibler le thème sombre via `:host(.dark)` dans le Shadow DOM.
+
+<br>
+
+---
+
+<br>
+
 ## [1.0.1] – 14-06-2025
 
 ### ✨ Ajout

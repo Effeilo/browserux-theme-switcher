@@ -74,7 +74,8 @@ template.innerHTML = `
         top: -2px;
     }
     [data-theme="dark"] .toggle-thumb,
-    :host-context([data-theme="dark"]) .toggle-thumb {
+    :host-context([data-theme="dark"]) .toggle-thumb,
+    :host(.dark) .toggle-thumb {
         transform: translateX(calc(var(--bux-switch-width) - var(--bux-switch-height)));
     }
 </style>
@@ -352,6 +353,16 @@ class BrowseruxThemeSwitcher extends HTMLElement {
 
         // Sets the 'data-theme' attribute to either 'light' or 'dark'
         target.setAttribute('data-theme', theme);
+
+        /**
+         * Firefox fallback:
+         * Firefox does not support the CSS selector :host-context()
+         * To ensure styles inside the Shadow DOM can respond to the theme,
+         * we add a theme-specific class ('dark' or 'light') to the custom element itself.
+         * This allows using :host(.dark) and :host(.light) inside component styles.
+         */
+        this.classList.toggle('dark', theme === 'dark');
+        this.classList.toggle('light', theme === 'light');
 
         // Updates the ARIA label on the toggle button based on the new theme
         this.updateButtonLabel();

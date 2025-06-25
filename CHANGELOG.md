@@ -15,6 +15,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 <br>
 
+## [1.0.2] – 2025-06-25
+
+### 🐞 Fixed
+
+- Firefox compatibility: added a fallback for the unsupported `:host-context([data-theme="dark"])` selector.
+  - The component now also uses a `.dark` class on `<browserux-theme-switcher>`, enabling `:host(.dark)` styling inside Shadow DOM for consistent theme behavior in Firefox.
+
+<br>
+
+---
+
+<br>
+
 ## [1.0.1] – 2025-06-14
 
 ### ✨ Added
