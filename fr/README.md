@@ -11,8 +11,8 @@ Un Web Component léger et personnalisable permettant aux utilisateurs de bascul
 [![npm version](https://img.shields.io/npm/v/browserux-theme-switcher.svg)](https://www.npmjs.com/package/browserux-theme-switcher)
 [![unpkg](https://img.shields.io/badge/CDN-unpkg-brightgreen)](https://unpkg.com/browserux-theme-switcher/dist/browserux-theme-switcher.min.js)
 
-- Le site du projet : [BrowserUX Theme Switcher](https:/browserux.com/fr/theme-switcher/)
-- [La documentation](https:/browserux.com/fr/theme-switcher/documentation/)
+- Le site du projet : [BrowserUX Theme Switcher](https://browserux.com/fr/theme-switcher/)
+- [La documentation](https://browserux.com/fr/theme-switcher/documentation/)
 - [À propos de BrowserUX Theme Switcher](https://browserux.com/fr/blog/articles/a-propos-de-browserux-theme-switcher.html)
 
 ## Sommaire 
