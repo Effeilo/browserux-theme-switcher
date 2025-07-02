@@ -254,39 +254,60 @@ Pour que le thème clair ou sombre s’applique à votre page, vous devez défin
 
 ### Gestion des images selon le thème (dark mode)
 
-Le composant `<browserux-theme-switcher>` prend en charge automatiquement l’affichage d’images adaptées au thème (clair ou sombre), grâce à la classe spéciale `has-dark`.
+Le composant `<browserux-theme-switcher>` prend en charge automatiquement les images sensibles au thème en utilisant la classe `has-dark`.
 
-#### Comment ça fonctionne ?
+#### 🔁 Changement d’image automatique (convention de nommage)
 
-Lorsque vous ajoutez la classe `has-dark` à une image dans votre HTML :
+Par défaut, tout élément `<img>` ayant la classe `has-dark` verra son attribut `src` modifié dynamiquement en fonction du thème actif :
 
 ```html
 <img src="logo.png" class="has-dark" alt="Logo">
 ```
 
-Le composant remplacera automatiquement l’attribut `src` par une version `-dark` lorsque le thème sombre est actif, et reviendra à l’image initiale si le thème redevient clair.
+- En mode clair : l’image d’origine est utilisée (`/img/logo.png`)
+- En mode sombre : le composant recherchera `/img/logo-dark.png`
 
-#### Conditions à respecter
+Cela fonctionne en ajoutant automatiquement `-dark` avant l’extension du fichier,  
+et convient parfaitement aux ressources statiques suivant une convention de nommage cohérente.
 
-- L’image d’origine doit être nommée `nom.ext` (ex. `logo.png`).
-- L’image sombre doit être nommée exactement `nom-dark.ext`(ex. `logo-dark.png`).
-- Les deux images doivent se trouver dans le même répertoire.
+#### ⚙️ Changement d’image manuel (attributs personnalisés)
 
-#### Exemple
-
-En mode clair :
+Pour un contrôle plus précis, vous pouvez définir explicitement quelle image utiliser pour chaque thème à l’aide des attributs `data-src-light` et `data-src-dark` :
 
 ```html
-<img src="logo.png" class="has-dark" />
+<img
+  class="has-dark"
+  src="/cdn/images/logo-light.webp"
+  data-src-light="/cdn/images/logo-light.webp"
+  data-src-dark="/cdn/images/logo-dark.webp"
+  alt="Logo"
+/>
 ```
 
-→ Affiche `logo.png`
+Cela est utile lorsque :
 
-🌙 En mode sombre :
+- Vos images ne suivent pas la convention de nommage avec le suffixe `-dark`
+- Les ressources sont servies depuis un CMS ou un CDN avec des URLs personnalisées
+- Vous souhaitez désactiver la logique automatique pour certains cas spécifiques
 
-→ Remplacée automatiquement par `logo-dark.png`
+> Si les deux attributs `data-src-*` sont présents, ils ont priorité sur la convention de nommage.
 
-> Le changement est réversible et instantané à chaque bascule de thème, sans rechargement de page ni JavaScript supplémentaire.
+#### 🔒 Désactivation du changement automatique
+
+Vous pouvez désactiver le remplacement automatique de l’image pour un élément spécifique en ajoutant l’attribut `data-locked` :
+
+```html
+<img
+  class="has-dark"
+  src="/img/logo-custom.webp"
+  data-locked
+  alt="Static Logo"
+/>
+```
+
+Cela empêchera le composant de modifier l’attribut `src`, quel que soit le thème actif.
+
+Ces fonctionnalités sont compatibles avec tous les frameworks modernes, y compris React, Vue, Angular et le HTML pur.
 
 ## Paramètres de `<browserux-theme-switcher>`
 

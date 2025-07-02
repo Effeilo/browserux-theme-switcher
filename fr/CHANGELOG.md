@@ -15,6 +15,28 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [1.1.0] – 02-07-2025
+
+### ✨ Ajouté
+
+- Prise en charge du **changement d’images en fonction du thème** dans tous les frameworks (React, Vue, Angular, HTML) :
+  - Remplace dynamiquement la source des balises `<img class="has-dark">` selon le thème actif.
+  - Fonctionne **automatiquement** en suivant une convention de nom de fichier `-dark` (ex. `logo.webp` → `logo-dark.webp`).
+  - Prend également en charge un **contrôle manuel** avec les attributs `data-src-light` et `data-src-dark`.
+
+### 🛠 Amélioré
+
+- Le Web Component prend désormais en charge les images ajoutées dynamiquement (par exemple via JSX, templates Vue ou bindings Angular).
+- Les fonctions utilitaires `updateImagesByTheme()` et `updateThemeImages()` fonctionnent désormais ensemble :
+  - `updateImagesByTheme()` applique automatiquement la logique basée sur le nom de fichier.
+  - `updateThemeImages()` permet un contrôle plus fin via des attributs explicites.
+
+<br>
+
+---
+
+<br>
+
 ## [1.0.3] – 25-06-2025
 
 ### 🐞 Corrigé

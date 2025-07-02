@@ -15,6 +15,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 <br>
 
+## [1.1.0] – 2025-07-02
+
+### ✨ Added
+
+- Support for **theme-based image swapping** in any framework (React, Vue, Angular, HTML):
+  - Dynamically replaces `<img class="has-dark">` sources based on the current theme.
+  - Works **automatically** using a `-dark` filename convention (e.g. `logo.webp` → `logo-dark.webp`).
+  - Also supports **manual override** with `data-src-light` and `data-src-dark` attributes for full control.
+
+### 🛠 Improved
+
+- Web Component now handles images inserted dynamically (e.g. via JSX, Vue templates, Angular bindings).
+- The `updateImagesByTheme()` and `updateThemeImages()` utilities work together:
+  - `updateImagesByTheme()` applies filename-based switching for simple use cases.
+  - `updateThemeImages()` enables fine-grained control via explicit attributes.
+
+<br>
+
+---
+
+<br>
+
 ## [1.0.3] – 2025-06-25
 
 ### 🐞 Fixed

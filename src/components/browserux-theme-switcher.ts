@@ -15,7 +15,21 @@
  * The visual toggle switch is rendered with styles inside a Shadow DOM.
  */
 
+/**
+ * Automatic image switching based on filename convention:
+ * Replaces the `src` of <img class="has-dark"> with a "-dark" variant when the theme is dark.
+ * Example: "/img/logo.webp" → "/img/logo-dark.webp"
+ */
+
 import { updateImagesByTheme } from "../utils/theme-utils";
+
+/**
+ * Manual image switching using explicit attributes:
+ * Swaps the `src` of <img class="has-dark"> based on `data-src-light` and `data-src-dark`.
+ * Useful when filenames don't follow a "-dark" naming convention.
+ */
+
+import { updateThemeImages } from "../utils/theme-image";
 
 /**
  * Imports the strict type definition for valid theme values ('light' | 'dark').
@@ -369,6 +383,7 @@ class BrowseruxThemeSwitcher extends HTMLElement {
 
         // Updates image sources to match the selected theme
         updateImagesByTheme(this.getThemeTarget());
+        updateThemeImages(theme);
 
         // Dispatches a custom 'theme-change' event so that other components or scripts can react
         this.dispatchEvent(new CustomEvent('theme-change', {

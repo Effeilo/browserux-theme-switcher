@@ -2,6 +2,8 @@
  * Updates images based on the theme applied to a given target.
  * Automatically replaces .ext with -dark.ext in dark mode, for images with 'has-dark'.
  *
+ * Images can opt out of theme switching by adding the attribute `data-locked`.
+ *
  * @param target - The element on which the theme is applied (defaults to <html>)
  */
 
@@ -13,6 +15,9 @@ export function updateImagesByTheme(target: HTMLElement = document.documentEleme
 
     // Selects all <img> elements that have the "has-dark" class
     document.querySelectorAll<HTMLImageElement>('img.has-dark').forEach((img) => {
+
+        // Skip images that explicitly opt out
+        if (img.hasAttribute("data-locked")) return;
 
         // Retrieves the original image source:
         // - If the image already has a saved value in data-src, use it

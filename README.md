@@ -257,40 +257,59 @@ to the targeted element (by default `<html>`), which enables dynamic styling of 
 
 ### Managing Images Based on Theme (Dark Mode)
 
-The `<browserux-theme-switcher>` component automatically handles theme-adaptive image display (light or dark) using the special `has-dark` class.
+The `<browserux-theme-switcher>` component provides automatic support for theme-aware images using the `has-dark` class.
 
-#### How does it work?
+#### Automatic image switching (filename convention)
 
-When you add the `has-dark` class to an image in your HTML:
+By default, any `<img>` element with the `has-dark` class will have its `src` swapped based on the current theme:
 
 ```html
 <img src="logo.png" class="has-dark" alt="Logo">
 ```
 
-The component will automatically replace the `src` attribute with a `-dark` version when dark mode is active,  
-and revert to the original image when switching back to light mode.
+- In light mode: the original image is used (`/img/logo.png`)
+- In dark mode: the component will look for `/img/logo-dark.png`
 
-#### Requirements
+This works by appending `-dark` before the file extension, and is ideal for static assets that follow a consistent naming convention.
 
-- The original image must be named `name.ext` (e.g., `logo.png`).
-- The dark image must be named exactly `name-dark.ext` (e.g., `logo-dark.png`).
-- Both images must be located in the same directory.
+#### Manual image switching (custom source attributes)
 
-#### Example
-
-In light mode:
+For more control, you can specify exactly which image to use for each theme using `data-src-light` and `data-src-dark`:
 
 ```html
-<img src="logo.png" class="has-dark" />
+<img
+  class="has-dark"
+  src="/cdn/images/logo-light.webp"
+  data-src-light="/cdn/images/logo-light.webp"
+  data-src-dark="/cdn/images/logo-dark.webp"
+  alt="Logo"
+/>
 ```
 
-→ Displays `logo.png`
+This is useful when:
 
-🌙 In dark mode:
+- Your images don't follow the `-dark` naming pattern
+- Assets are served from a CMS or CDN with custom URLs
+- You want to override the automatic logic for specific cases
 
-→ Automatically replaced with `logo-dark.png`
+> If both `data-src-*` attributes are present, they take precedence over the filename convention.
 
-> The change is reversible and instant every time the theme switches, with no page reload or extra JavaScript required.
+#### Opting out of auto-swapping
+
+You can disable image swapping for a specific image by adding the `data-locked` attribute:
+
+```html
+<img
+  class="has-dark"
+  src="/img/logo-custom.webp"
+  data-locked
+  alt="Static Logo"
+/>
+```
+
+This will prevent the component from modifying the src, regardless of the theme.
+
+These features work across all modern frameworks, including React, Vue, Angular, and plain HTML.
 
 ## Parameters of `<browserux-theme-switcher>`
 
