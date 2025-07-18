@@ -1,7 +1,7 @@
 [EN](../README.md) | **FR**
 
 <div>
-  <img src="https://browserux.com/assets/img/logo/logo-browserux-theme-switcher-250.png" alt="logo BrowserUX Theme Switcher"/>
+  <img src="https://browserux.com/img/logos/logo-browserux-theme-switcher-300.png" alt="logo BrowserUX Theme Switcher"/>
 </div>
 
 # BrowserUX Theme Switcher
