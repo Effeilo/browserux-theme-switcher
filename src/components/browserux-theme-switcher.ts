@@ -312,19 +312,23 @@ class BrowseruxThemeSwitcher extends HTMLElement {
      *
      * This method checks if the component has a 'target' attribute and tries to
      * select the corresponding element from the DOM.
-     * If the selector is missing or invalid, it falls back to the <html> element.
+     * If the selector is missing, invalid, or not found, it falls back to the <html> element.
      *
      * @returns {HTMLElement} The element where the 'data-theme' attribute is applied.
      */
-    
+
     private getThemeTarget(): HTMLElement {
         // Reads the 'target' attribute value, if present
         const selector = this.getAttribute('target');
 
-        // Tries to find the element using querySelector
-        // If not found or missing, fallback to <html>
-        return selector ? document.querySelector<HTMLElement>(selector) || document.documentElement : document.documentElement;
-  
+        if (!selector) return document.documentElement;
+
+        // Wraps querySelector in a try/catch to handle invalid CSS selectors gracefully
+        try {
+            return document.querySelector<HTMLElement>(selector) || document.documentElement;
+        } catch {
+            return document.documentElement;
+        }
     }
 
     /**
@@ -344,7 +348,13 @@ class BrowseruxThemeSwitcher extends HTMLElement {
         const newTheme: ThemeMode = current === 'dark' ? 'light' : 'dark';
 
         // Saves the selected theme in localStorage to persist user preference
-        localStorage.setItem('theme', newTheme);
+        // Wrapped in try/catch to handle environments where localStorage is unavailable
+        // (e.g., private browsing mode in Safari/Firefox, or iframe security restrictions)
+        try {
+            localStorage.setItem('theme', newTheme);
+        } catch {
+            // Silently fail — the component still works without persistence
+        }
 
         // Applies the new theme and triggers related updates
         this.applyTheme(newTheme);
@@ -415,10 +425,10 @@ class BrowseruxThemeSwitcher extends HTMLElement {
         const fallback = I18N_LABELS[lang] || I18N_LABELS['en'];
 
         // Get the dark mode label from attribute or fallback to the localized default
-        const darkLabel = this.getAttribute('data-label-dark') || fallback.light;
+        const darkLabel = this.getAttribute('data-label-dark') || fallback.dark;
 
         // Get the light mode label from attribute or fallback to the localized default
-        const lightLabel = this.getAttribute('data-label-light') || fallback.dark;
+        const lightLabel = this.getAttribute('data-label-light') || fallback.light;
 
         // Choose the correct label based on the active theme
         const label = theme === 'dark' ? darkLabel : lightLabel;
@@ -452,7 +462,13 @@ class BrowseruxThemeSwitcher extends HTMLElement {
     
     private initializeTheme(): void {
         // Retrieve the user's saved theme preference from localStorage (if any)
-        const saved = localStorage.getItem('theme');
+        // Wrapped in try/catch to handle private browsing mode or security restrictions
+        let saved: string | null = null;
+        try {
+            saved = localStorage.getItem('theme');
+        } catch {
+            // localStorage unavailable — proceed with system preference
+        }
 
         // Detect the system's preferred color scheme using a media query
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

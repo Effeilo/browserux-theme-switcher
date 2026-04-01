@@ -15,6 +15,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 <br>
 
+## [1.1.1] – 2026-03-28
+
+### 🐞 Fixed
+
+- **Inverted label fallbacks in `updateButtonLabel()`**: the `fallback.light` and `fallback.dark` values were swapped when no custom `data-label-*` attributes were provided, causing incorrect ARIA labels to be set on the toggle button.
+- **`localStorage` error handling**: `getItem` and `setItem` calls are now wrapped in `try/catch` to prevent crashes in environments where `localStorage` is unavailable (e.g. private browsing mode in Safari/Firefox, or iframe security restrictions). The component gracefully falls back to system preferences.
+- **Invalid `target` selector**: the `querySelector` call in `getThemeTarget()` is now wrapped in a `try/catch` to handle invalid CSS selectors (e.g. `target="@invalid"`) without throwing an uncaught `DOMException`.
+- **Image URL regex**: updated the regex in `updateImagesByTheme()` from `/(\.\w+)$/` to `/(\.\w+)(\?.*)?$/` to correctly preserve query strings (e.g. `logo.png?v=2` → `logo-dark.png?v=2`).
+
+<br>
+
+---
+
+<br>
+
 ## [1.1.0] – 2025-07-02
 
 ### ✨ Added

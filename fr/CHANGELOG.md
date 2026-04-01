@@ -15,6 +15,21 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [1.1.1] – 28-03-2026
+
+### 🐞 Corrigé
+
+- **Labels inversés dans `updateButtonLabel()`** : les valeurs `fallback.light` et `fallback.dark` étaient échangées en l'absence d'attributs `data-label-*` personnalisés, ce qui provoquait des labels ARIA incorrects sur le bouton de bascule.
+- **Gestion des erreurs `localStorage`** : les appels `getItem` et `setItem` sont désormais entourés d'un `try/catch` pour éviter tout crash dans les environnements où `localStorage` est indisponible (navigation privée Safari/Firefox, restrictions de sécurité dans les iframes). Le composant se replie gracieusement sur les préférences système.
+- **Sélecteur `target` invalide** : l'appel `querySelector` dans `getThemeTarget()` est maintenant protégé par un `try/catch` afin de gérer les sélecteurs CSS invalides (ex. `target="@invalid"`) sans lever de `DOMException` non catchée.
+- **Regex sur les URLs d'images** : la regex dans `updateImagesByTheme()` est mise à jour de `/(\.\w+)$/` vers `/(\.\w+)(\?.*)?$/` pour conserver correctement les query strings (ex. `logo.png?v=2` → `logo-dark.png?v=2`).
+
+<br>
+
+---
+
+<br>
+
 ## [1.1.0] – 02-07-2025
 
 ### ✨ Ajouté

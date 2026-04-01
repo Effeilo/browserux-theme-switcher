@@ -30,8 +30,9 @@ export function updateImagesByTheme(target: HTMLElement = document.documentEleme
 
         // If the theme is dark
         img.src = isDark
-            // Replace the original file extension (e.g., ".png") with "-dark.png"
-            ? originalSrc.replace(/(\.\w+)$/, "-dark$1")
+            // Replace the file extension (e.g., ".png") with "-dark.png"
+            // The regex handles optional query strings (e.g., "image.png?v=1" → "image-dark.png?v=1")
+            ? originalSrc.replace(/(\.\w+)(\?.*)?$/, (_, ext, qs) => `-dark${ext}${qs ?? ''}`)
             // Otherwise, restore the original image source from data-src
             : img.dataset.src;
     });
