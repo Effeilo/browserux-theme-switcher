@@ -11,7 +11,7 @@
 BrowserUX Theme Switcher is a lightweight, accessible, and customizable Web Component designed to easily add a theme switcher button to any website or application. It automatically detects the system theme, remembers the user's preference, and applies the correct theme.
 
 - [Project website](https://browserux.com/theme-switcher/)
-- [Demo](https://browserux.com/share-button/theme-switcher/demo/)
+- [Demo](https://browserux.com/theme-switcher/demo/)
 - [Documentation](./docs/index.md)
 - [Changelog](./CHANGELOG.md)
 
