@@ -353,7 +353,7 @@ class BrowseruxThemeSwitcher extends HTMLElement {
         try {
             localStorage.setItem('theme', newTheme);
         } catch {
-            // Silently fail — the component still works without persistence
+            // Silently fail, the component still works without persistence
         }
 
         // Applies the new theme and triggers related updates
@@ -467,7 +467,7 @@ class BrowseruxThemeSwitcher extends HTMLElement {
         try {
             saved = localStorage.getItem('theme');
         } catch {
-            // localStorage unavailable — proceed with system preference
+            // localStorage unavailable, proceed with system preference
         }
 
         // Detect the system's preferred color scheme using a media query

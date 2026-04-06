@@ -15,6 +15,18 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [1.1.2] – 06-04-2026
+
+### 🛠 Corrigé
+
+- Ajout de `rootDir` dans `tsconfig.json` pour résoudre l'erreur TypeScript 5.x causée par l'absence de répertoire racine explicite quand `declarationDir` est défini
+- Mise à jour de `moduleResolution` de la valeur dépréciée `"node"` vers `"bundler"` pour la compatibilité TypeScript 5.x
+- Suppression de l'entrée `types` inexistante dans `include` dans `tsconfig.json`
+
+---
+
+<br>
+
 ## [1.1.1] – 28-03-2026
 
 ### 🐞 Corrigé
